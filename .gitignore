@@ -1,0 +1,7 @@
+# useless codeblocks files
+.layout
+
+#binary and temporary files
+/bin
+/obj
+

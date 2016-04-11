@@ -18,31 +18,24 @@ List_Head *list_new(void)
 
 void list_delete(List_Head *pHead)
 {
-	List_Node *pTemp;
-	assert(pHead != NULL);
-	if(pHead->count == 0) { return; }
-	pTemp = pHead->pNext;
-	while(pTemp->pNext != NULL)
-	{
-		pTemp = pTemp->pNext;
-		free(pTemp);
-	}
-	pHead->count = 0;
-	pHead->pNext = NULL;
+    assert(pHead != NULL);
+
+    list_clear(pHead);
 	free(pHead);
 }
 
 int list_len(List_Head *pHead)
 {
 	assert(pHead != NULL);
-	if (pHead == NULL) return -1;
+//	if (pHead == NULL) return -1;
 	return pHead->count;
 }
 
 int list_search(List_Head *pHead, List_Node *pNode)
 {
+    assert((pHead != NULL) && (pNode != NULL));
+
 	List_Node *pTemp = NULL;
-	assert(pHead != NULL);
 	if(pHead->count == 0) return 0;
 	pTemp = pHead->pNext;
 	while(pTemp != NULL) {
@@ -64,12 +57,15 @@ List_Node *list_tail(List_Head *pHead)
 
 List_Node *list_ins_head(List_Head *pHead)
 {
-	List_Node *pTemp = pHead->pNext;
+    assert(pHead != NULL);
 
+	List_Node *pTemp = pHead->pNext;
 	List_Node *pNode = malloc(sizeof(List_Node));
-	if (pNode == NULL) return NULL;
+	if (pNode == NULL)
+        return NULL;
 	pNode->pData = NULL;
 	pNode->pNext = NULL;
+
 	if(pHead->pNext == NULL) /* adding to empty list */
 	{
 		pHead->pNext = pNode;
@@ -90,17 +86,21 @@ List_Node *list_ins_head_data(List_Head *pHead, void *Data)
 
 List_Node *list_ins_tail(List_Head *pHead)
 {
+    assert(pHead != NULL);
+
 	List_Node *pTemp = pHead->pNext;
 	List_Node *pNode = malloc(sizeof(List_Node));
-	if (pNode == NULL) return NULL;
+	if (pNode == NULL)
+        return NULL;
 	pNode->pData = NULL;
+    pNode->pNext = NULL; /* it will be a tail of a list */
+
 	if(pHead->pNext == NULL) /* empty list */
 	{
 		pHead->pNext = pNode;
 	} else {
 		pTemp = list_tail(pHead);
 		pTemp->pNext = pNode;
-		pNode->pNext = NULL;
 	}
 	pHead->count++;
 	return pNode;
@@ -331,14 +331,17 @@ int list_node_array(List_Head *pHead, void *pArr[], int len)
 
 void list_clear(List_Head *pHead)
 {
-	List_Node *pTemp = pHead->pNext;
-	assert(pHead != NULL);
-	if(pTemp != NULL)
+    assert(pHead != NULL);
+
+	List_Node *pTemp;
+	List_Node *pDel = pHead->pNext;
+	if(pDel != NULL)
 	{
-		while(pTemp->pNext != NULL)
+		while(pDel->pNext != NULL)
 		{
-			pTemp = pTemp->pNext;
-			free(pTemp);
+			pTemp = pDel->pNext;
+			free(pDel);
+			pDel = pTemp;
 		}
 	}
 	pHead->count = 0;
