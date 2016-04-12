@@ -31,6 +31,35 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="lib_hash.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib_hash.h" />
+		<Unit filename="lib_ll.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib_ll.h" />
+		<Unit filename="lib_random.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib_random.h" />
+		<Unit filename="lib_sort.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib_sort.h" />
+		<Unit filename="lib_term_color.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib_test.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib_test.h" />
+		<Unit filename="lib_vbtree.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib_vbtree.h" />
+		<Unit filename="lib_vqueue.h" />
+		<Unit filename="lib_vstack.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
